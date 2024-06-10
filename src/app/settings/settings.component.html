@@ -1,0 +1,73 @@
+<router-outlet></router-outlet>
+<input type="checkbox" id="menu-toggle" />
+
+<div class="main-content">
+  <header>
+    <div class="header-content">
+      <label for="menu-toggle">
+        <span class="las la-bars"></span>
+      </label>
+
+      <div class="header-menu">
+        <label for="">
+          <span class="las la-search"></span>
+        </label>
+
+        <div class="notify-icon">
+          <span class="las la-envelope"></span>
+          <span class="notify">4</span>
+        </div>
+
+        <div class="notify-icon">
+          <span class="las la-bell"></span>
+          <span class="notify">3</span>
+        </div>
+
+        <div class="user">
+          <div
+            class="bg-img"
+            style="
+              background-image: url(https://secure.gravatar.com/avatar/d09eaad01aea86c51b4f892b4f8abf6f?s=100&d=wavatar&r=g);
+            "
+          ></div>
+
+          <span class="las la-power-off"></span>
+          <span>Logout</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h1>Settings</h1>
+      <small>Home / Settings</small>
+    </div>
+
+    <div class="page-content">
+      <div class="analytics">
+        <div>
+          <form action="">
+            <input
+              type="password"
+              id="fname"
+              name="firstname"
+              placeholder="New Password.."
+              required=""
+            />
+
+            <input
+              type="password"
+              id="lname"
+              name="lastname"
+              placeholder="Confirm Password.."
+              required=""
+            />
+
+            <button type="submit">Save Changes</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>

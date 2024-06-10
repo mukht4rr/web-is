@@ -1,0 +1,229 @@
+<div class="main-content">
+  <header>
+    <div class="header-content">
+      <label for="menu-toggle">
+        <span class="las la-bars"></span>
+      </label>
+
+      <div class="header-menu">
+        <label for="">
+          <span class="las la-search"></span>
+        </label>
+
+        <div class="notify-icon">
+          <span class="las la-envelope"></span>
+          <span class="notify">4</span>
+        </div>
+
+        <div class="notify-icon">
+          <span class="las la-bell"></span>
+          <span class="notify">3</span>
+        </div>
+
+        <div class="user">
+          <div
+            class="bg-img"
+            style="background-image: url(../assets/images/admin.jpg)"
+          ></div>
+
+          <span class="las la-power-off"></span>
+          <span>Logout</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h1>Dashboard</h1>
+      <small>Home / Dashboard</small>
+    </div>
+
+    <div class="page-content">
+      <div class="analytics">
+        <div class="card-dash">
+          <div class="card-head">
+            <h2>107</h2>
+            <span class="las la-user-friends"></span>
+          </div>
+          <div class="card-progress">
+            <small>Total Students</small>
+          </div>
+        </div>
+
+        <div class="card-dash">
+          <div class="card-head">
+            <h2>25</h2>
+            <span class="las la-user-friends"></span>
+          </div>
+          <div class="card-progress">
+            <small>Total Lecturers</small>
+          </div>
+        </div>
+
+        <div class="card-dash">
+          <div class="card-head">
+            <h2>80</h2>
+            <span class="las la-clipboard-list"></span>
+          </div>
+          <div class="card-progress">
+            <small>Total Courses</small>
+          </div>
+        </div>
+
+        <div class="card-dash">
+          <div class="card-head">
+            <h2>500</h2>
+            <span class="las la-envelope"></span>
+          </div>
+          <div class="card-progress">
+            <small>New E-mails received</small>
+          </div>
+        </div>
+      </div>
+
+      <div class="records table-responsive">
+        <div class="record-header">
+          <div class="add">
+            <span>Entries</span>
+            <select name="" id="">
+              <option value="">ID</option>
+            </select>
+            <button
+              type="button"
+              class="btn btn-primary"
+              data-toggle="modal"
+              data-target="#exampleModal"
+              data-whatever="@mdo"
+            >
+              Add Course
+            </button>
+          </div>
+
+          <div class="browse">
+            <input type="search" placeholder="Search" class="record-search" />
+            <select name="" id="">
+              <option value="">Status</option>
+            </select>
+          </div>
+        </div>
+
+        <div>
+          <table width="100%">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th><span class="las la-sort"></span> COURSE ID</th>
+                <th><span class="las la-sort"></span> COURSE NAME</th>
+                <th><span class="las la-sort"></span> COURSE CODE</th>
+                <th><span class="las la-sort"></span> ASSIGNED TO</th>
+                <th><span class="las la-sort"></span> ACTIONS</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1</td>
+                <td>001</td>
+                <td>Software Application</td>
+                <td>INF 2222</td>
+                <td>
+                  <div class="client">
+                    <div
+                      class="client-img bg-img"
+                      style="background-image: url(../assets/images/admin.jpg)"
+                    ></div>
+                    <div class="client-info">
+                      <h4>Mukht4rr</h4>
+                      <small>Admin</small>
+                    </div>
+                  </div>
+                </td>
+                <td>
+                  <div class="actions">
+                    <span class="lab la-telegram-plane"></span>
+                    <span class="las la-eye"></span>
+                    <span class="las la-ellipsis-v"></span>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="exampleModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">New Course</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label"
+                  >Course Name:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="recipient-cname"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label"
+                  >Course Code:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="recipient-course"
+                  required=""
+                />
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label"
+                  >Assign To:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="recipient-lecturer"
+                  required=""
+                />
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">Submit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script></script>
