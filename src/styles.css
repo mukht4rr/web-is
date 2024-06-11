@@ -382,7 +382,7 @@ input, button, select {
 }
 
 .browse input {
-    width: 150px;
+    width: 250px;
 }
 
 .browse select {
@@ -416,6 +416,10 @@ table thead th:first-child {
 table tbody td {
     padding: 1rem 0rem;
     color: #444;
+}
+
+tr:hover{
+    background-color: #EAEDED;
 }
 
 table tbody td:first-child {
