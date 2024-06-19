@@ -2,6 +2,7 @@ import { Component, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-login',
@@ -38,28 +39,56 @@ export class LoginComponent implements AfterViewInit {
     this.authService.register(this.registerModel).subscribe(
       (response: any) => {
         console.log('Registration successful', response);
-        // Reset the register form
+        Swal.fire({
+          position: 'top-end',
+          icon: 'success',
+          title: 'Successfully Registered',
+          showConfirmButton: false,
+          timer: 1500
+        });
         this.registerModel = {};
-        // Optionally, redirect to login or another page
       },
       (error: any) => {
         console.error('Registration failed', error);
-        // Show error message to the user
-        alert(error.error);
+        Swal.fire({
+          position: 'top-end',
+          icon: 'warning',
+          title: 'Registration Failed',
+          text: error.error.message || error.error,
+          showConfirmButton: false,
+          timer: 1500
+        });
       }
     );
   }
   
+
   onLogin() {
     this.authService.login(this.loginModel).subscribe(
       (response: any) => {
         console.log('Login successful', response);
         this.router.navigate(['/home']);
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login successfully",
+          showConfirmButton: false,
+          timer: 1500
+        });
       },
       (error: any) => {
         console.error('Login failed', error);
-        // Show error message to the user
-        alert('Login failed. Please check your credentials.');
+        if (error.message === 'User not found' || error.message === 'Invalid credentials') {
+          Swal.fire({
+            position: "top-end",
+            icon: "error",
+            title: "Incoreect username or password!",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        } else {
+          alert('Login failed. Please try again later.');
+        }
       }
     );
   }

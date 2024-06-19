@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, catchError, throwError } from 'rxjs';
 import { Course } from './courses/courses.component';
 import { Lecturer } from './lecturers/lecturers.component';
+import { Student } from './students/students.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +14,19 @@ export class AuthService {
 
   constructor(private http: HttpClient) {}
 
-  register(user: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/register`, user);
+  register(students: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/register`, students);
   }
-
   login(user: any): Observable<any> {
-    return this.http.post(`${this.baseUrl}/auth/login`, user);
-  }
+    return this.http.post<any>(`${this.baseUrl}/auth/login`, user).pipe(
+      catchError((error: HttpErrorResponse) => {
+        console.error('Login error:', error);
+        return throwError(() => new Error(error.error.message || 'Login failed'));
+      })
+    );
+}
+
+  
 
   addCourse(course: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/courses/add`, course);
@@ -35,6 +42,10 @@ export class AuthService {
 
   getAllLecturers(): Observable<Lecturer[]> {
     return this.http.get<Lecturer[]>(`${this.baseUrl}/lecturers/get`);
+  }
+
+  getAllStudents(): Observable<Student[]> {
+    return this.http.get<Student[]>(`${this.baseUrl}/auth/get`);
   }
 
   updateCourseStatus(courseId: number, status: string): Observable<any> {

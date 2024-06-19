@@ -41,37 +41,49 @@
 
     <div class="page-content">
       <div class="analytics">
-        <div class="card-dash">
+        <div
+          class="card-dash"
+          style="background: linear-gradient(to right, #4facfe, #00f2fe)"
+        >
           <div class="card-head">
-            <h2>107</h2>
+            <h2>{{ totalStudents }}</h2>
             <span class="las la-user-friends"></span>
           </div>
           <div class="card-progress">
-            <small>Total Students</small>
+            <h3>Total Students</h3>
           </div>
         </div>
 
-        <div class="card-dash">
+        <div
+          class="card-dash"
+          style="background: linear-gradient(to right, #43e97b, #38f9d7)"
+        >
           <div class="card-head">
             <h2>{{ totalLecturers }}</h2>
             <span class="las la-user-friends"></span>
           </div>
           <div class="card-progress">
-            <small>Total Lecturers</small>
+            <h3>Total Lecturers</h3>
           </div>
         </div>
 
-        <div class="card-dash">
+        <div
+          class="card-dash"
+          style="background: linear-gradient(to right, #e8c3fd, #86c5f5fb)"
+        >
           <div class="card-head">
             <h2>{{ totalCourses }}</h2>
             <span class="las la-clipboard-list"></span>
           </div>
           <div class="card-progress">
-            <small>Total Courses</small>
+            <h3>Total Courses</h3>
           </div>
         </div>
 
-        <div class="card-dash">
+        <div
+          class="card-dash"
+          style="background: linear-gradient(to right, #64a1ff, #8bfcfe)"
+        >
           <div class="card-head">
             <h2>500</h2>
             <span class="las la-envelope"></span>
@@ -85,10 +97,6 @@
       <div class="records table-responsive">
         <div class="record-header">
           <div class="add">
-            <span>Entries</span>
-            <select name="" id="">
-              <option value="">ID</option>
-            </select>
             <button
               type="button"
               class="btn btn-primary"
@@ -96,15 +104,12 @@
               data-target="#exampleModal"
               data-whatever="@mdo"
             >
-              Add Course
+              Assign Course
             </button>
           </div>
 
           <div class="browse">
             <input type="search" placeholder="Search" class="record-search" />
-            <select name="" id="">
-              <option value="">Status</option>
-            </select>
           </div>
         </div>
 
@@ -163,7 +168,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">New Course</h5>
+            <h5 class="modal-title" id="exampleModalLabel">Assign Course</h5>
             <button
               type="button"
               class="close"
@@ -176,37 +181,30 @@
           <div class="modal-body">
             <form>
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label"
+                <label for="lecturer-select" class="col-form-label"
+                  >Lecturer Name:</label
+                >
+                <select id="lecturer-select" class="form-control">
+                  <option
+                    *ngFor="let lecturer of lecturers"
+                    [value]="lecturer.lecturerId"
+                  >
+                    {{ lecturer.lecturerName }}
+                  </option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="course-select" class="col-form-label"
                   >Course Name:</label
                 >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="recipient-cname"
-                  required=""
-                />
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label"
-                  >Course Code:</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="recipient-course"
-                  required=""
-                />
-              </div>
-              <div class="form-group">
-                <label for="recipient-name" class="col-form-label"
-                  >Assign To:</label
-                >
-                <input
-                  type="text"
-                  class="form-control"
-                  id="recipient-lecturer"
-                  required=""
-                />
+                <select id="course-select" class="form-control">
+                  <option
+                    *ngFor="let course of courses"
+                    [value]="course.courseId"
+                  >
+                    {{ course.courseTitle }}
+                  </option>
+                </select>
               </div>
             </form>
           </div>
@@ -218,7 +216,7 @@
             >
               Close
             </button>
-            <button type="button" class="btn btn-primary">Submit</button>
+            <button type="button" class="btn btn-primary">Assign</button>
           </div>
         </div>
       </div>

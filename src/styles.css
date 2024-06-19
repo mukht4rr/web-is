@@ -277,6 +277,8 @@ main {
     background: #fff;
     padding: 1rem;
     border-radius: 3px;
+    text-align: center;
+    color: white;
 }
 
 .card-dash-head {

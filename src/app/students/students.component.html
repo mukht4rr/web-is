@@ -69,17 +69,14 @@
           <table width="100%">
             <thead>
               <tr>
-                <th>REG NUMBER</th>
-                <th><span class="las la-sort"></span> NAME</th>
+                <th>NAME</th>
                 <th><span class="las la-sort"></span> EMAIL</th>
-                <th><span class="las la-sort"></span> COURSE</th>
-                <th><span class="las la-sort"></span> YEAR OF STUDY</th>
+                <th><span class="las la-sort"></span> REGISTRATION NUMBER</th>
                 <th><span class="las la-sort"></span> ACTIONS</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>BITAM/10/22/014/TZ</td>
+              <tr *ngFor="let student of filteredStudents">
                 <td>
                   <div class="client">
                     <div
@@ -89,13 +86,12 @@
                       "
                     ></div>
                     <div class="client-info">
-                      <h4>MUKHTAR MOHAMMED SALEH</h4>
+                      <h4>{{ student.fullname }}</h4>
                     </div>
                   </div>
                 </td>
                 <td>mukhtargmail.com</td>
-                <td>BITAM</td>
-                <td style="padding-left: 0.7in">2</td>
+                <td>{{ student.registrationNumber }}</td>
                 <td>
                   <div class="actions">
                     <span class="lab la-telegram-plane"></span>

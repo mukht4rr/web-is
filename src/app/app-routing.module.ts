@@ -10,7 +10,7 @@ import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   {
     path: '',
     component: MainLayoutComponent,
