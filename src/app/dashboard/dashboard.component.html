@@ -118,19 +118,17 @@
             <thead>
               <tr>
                 <th>#</th>
-                <th><span class="las la-sort"></span> COURSE ID</th>
-                <th><span class="las la-sort"></span> COURSE NAME</th>
+                <th><span class="las la-sort"></span> COURSE TITLE</th>
                 <th><span class="las la-sort"></span> COURSE CODE</th>
                 <th><span class="las la-sort"></span> ASSIGNED TO</th>
                 <th><span class="las la-sort"></span> ACTIONS</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>1</td>
-                <td>001</td>
-                <td>Software Application</td>
-                <td>INF 2222</td>
+              <tr *ngFor="let course of lecturerCourses; let i = index">
+                <td>{{ i + 1 }}</td>
+                <td>{{ course.course.courseTitle }}</td>
+                <td>{{ course.courseCode }}</td>
                 <td>
                   <div class="client">
                     <div
@@ -138,8 +136,9 @@
                       style="background-image: url(../assets/images/admin.jpg)"
                     ></div>
                     <div class="client-info">
-                      <h4>Mukht4rr</h4>
-                      <small>Admin</small>
+                      <h4>{{ course.lecturer.lecturerName }}</h4>
+                      <small>{{ course.lecturer.role }}</small>
+                      <!-- Adjust according to actual structure -->
                     </div>
                   </div>
                 </td>
@@ -179,12 +178,17 @@
             </button>
           </div>
           <div class="modal-body">
-            <form>
+            <form (ngSubmit)="assignCourseToLecturer()">
               <div class="form-group">
                 <label for="lecturer-select" class="col-form-label"
                   >Lecturer Name:</label
                 >
-                <select id="lecturer-select" class="form-control">
+                <select
+                  id="lecturer-select"
+                  class="form-control"
+                  [(ngModel)]="selectedLecturerId"
+                  name="lecturer"
+                >
                   <option
                     *ngFor="let lecturer of lecturers"
                     [value]="lecturer.lecturerId"
@@ -197,7 +201,12 @@
                 <label for="course-select" class="col-form-label"
                   >Course Name:</label
                 >
-                <select id="course-select" class="form-control">
+                <select
+                  id="course-select"
+                  class="form-control"
+                  [(ngModel)]="selectedCourseId"
+                  name="course"
+                >
                   <option
                     *ngFor="let course of courses"
                     [value]="course.courseId"
@@ -206,17 +215,17 @@
                   </option>
                 </select>
               </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">Assign</button>
+              </div>
             </form>
-          </div>
-          <div class="modal-footer">
-            <button
-              type="button"
-              class="btn btn-secondary"
-              data-dismiss="modal"
-            >
-              Close
-            </button>
-            <button type="button" class="btn btn-primary">Assign</button>
           </div>
         </div>
       </div>

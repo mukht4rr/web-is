@@ -8,6 +8,7 @@ import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
+import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -15,11 +16,11 @@ const routes: Routes = [
     path: '',
     component: MainLayoutComponent,
     children: [
-      { path: 'home', component: DashboardComponent },
-      { path: 'lecturers', component: LecturersComponent },
-      { path: 'students', component: StudentsComponent },
-      { path: 'courses', component: CoursesComponent },
-      { path: 'settings', component: SettingsComponent },
+      { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
+      { path: 'lecturers', component: LecturersComponent, canActivate: [AuthGuard] },
+      { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
+      { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
+      { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
     ]
   },
   {

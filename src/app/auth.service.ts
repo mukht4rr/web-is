@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, catchError, throwError } from 'rxjs';
+import { Observable, catchError, tap, throwError } from 'rxjs';
 import { Course } from './courses/courses.component';
 import { Lecturer } from './lecturers/lecturers.component';
 import { Student } from './students/students.component';
@@ -11,20 +11,60 @@ import { Student } from './students/students.component';
 export class AuthService {
   [x: string]: any;
   private baseUrl = 'http://localhost:8080'; // Adjust the base URL as needed
+  private isLoggedInStatus = false;
 
   constructor(private http: HttpClient) {}
 
   register(students: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/register`, students);
   }
+
   login(user: any): Observable<any> {
     return this.http.post<any>(`${this.baseUrl}/auth/login`, user).pipe(
+      tap(response => {
+        if (response.message === 'Login successful') {
+          this.isLoggedInStatus = true;
+        }
+      }),
       catchError((error: HttpErrorResponse) => {
         console.error('Login error:', error);
         return throwError(() => new Error(error.error.message || 'Login failed'));
       })
     );
-}
+  }
+
+  logout(): Observable<any> {
+    return this.http.post(`${this.baseUrl}/auth/logout`, {}).pipe(
+      tap(() => {
+        this.isLoggedInStatus = false;
+      })
+    );
+  }
+
+  checkSession(): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/auth/checkSession`).pipe(
+      tap(response => {
+        this.isLoggedInStatus = response.message === 'User is logged in';
+      }),
+      catchError((error: HttpErrorResponse) => {
+        this.isLoggedInStatus = false;
+        return throwError(() => new Error(error.error.message || 'Session check failed'));
+      })
+    );
+  }
+
+  isLoggedIn(): boolean {
+    return this.isLoggedInStatus;
+  }
+
+//   login(user: any): Observable<any> {
+//     return this.http.post<any>(`${this.baseUrl}/auth/login`, user).pipe(
+//       catchError((error: HttpErrorResponse) => {
+//         console.error('Login error:', error);
+//         return throwError(() => new Error(error.error.message || 'Login failed'));
+//       })
+//     );
+// }
 
   
 

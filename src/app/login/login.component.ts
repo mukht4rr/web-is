@@ -82,7 +82,7 @@ export class LoginComponent implements AfterViewInit {
           Swal.fire({
             position: "top-end",
             icon: "error",
-            title: "Incoreect username or password!",
+            title: "Incorrect username or password!",
             showConfirmButton: false,
             timer: 1500
           });
