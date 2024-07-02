@@ -46,7 +46,7 @@
           style="background: linear-gradient(to right, #4facfe, #00f2fe)"
         >
           <div class="card-head">
-            <h2>{{ totalStudents }}</h2>
+            <!-- <h2>{{ totalStudents }}</h2> -->
             <span class="las la-user-friends"></span>
           </div>
           <div class="card-progress">
@@ -59,7 +59,7 @@
           style="background: linear-gradient(to right, #43e97b, #38f9d7)"
         >
           <div class="card-head">
-            <h2>{{ totalLecturers }}</h2>
+            <!-- <h2>{{ totalLecturers }}</h2> -->
             <span class="las la-user-friends"></span>
           </div>
           <div class="card-progress">
@@ -72,7 +72,7 @@
           style="background: linear-gradient(to right, #e8c3fd, #86c5f5fb)"
         >
           <div class="card-head">
-            <h2>{{ totalCourses }}</h2>
+            <!-- <h2>{{ totalCourses }}</h2> -->
             <span class="las la-clipboard-list"></span>
           </div>
           <div class="card-progress">
@@ -125,7 +125,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let course of lecturerCourses; let i = index">
+              <tr *ngFor="let course of loginLecturerCourses; let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ course.course.courseTitle }}</td>
                 <td>{{ course.course.courseCode }}</td>
@@ -138,7 +138,6 @@
                     <div class="client-info">
                       <h4>{{ course.lecturer.lecturerName }}</h4>
                       <small>{{ course.lecturer.role }}</small>
-                      <!-- Adjust according to actual structure -->
                     </div>
                   </div>
                 </td>
@@ -178,7 +177,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <form (ngSubmit)="assignCourseToLecturer()">
+            <!-- <form (ngSubmit)="assignCourseToLecturer()">
               <div class="form-group">
                 <label for="lecturer-select" class="col-form-label"
                   >Lecturer Name:</label
@@ -225,7 +224,7 @@
                 </button>
                 <button type="submit" class="btn btn-primary">Assign</button>
               </div>
-            </form>
+            </form> -->
           </div>
         </div>
       </div>

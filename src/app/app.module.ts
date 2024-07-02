@@ -14,6 +14,11 @@ import { SidebarComponent } from './sidebar/sidebar.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 import { HttpClientModule } from '@angular/common/http';
+import { LecturerHomeComponent } from './lecturer-home/lecturer-home.component';
+import { LecturerCoursesComponent } from './lecturer-courses/lecturer-courses.component';
+import { StudentHomeComponent } from './student-home/student-home.component';
+import { StudentAttendencesComponent } from './student-attendences/student-attendences.component';
+import { LecturerAttendencesComponent } from './lecturer-attendences/lecturer-attendences.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +31,12 @@ import { HttpClientModule } from '@angular/common/http';
     DashboardComponent,
     SidebarComponent,
     MainLayoutComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    LecturerHomeComponent,
+    LecturerCoursesComponent,
+    StudentHomeComponent,
+    StudentAttendencesComponent,
+    LecturerAttendencesComponent
   ],
   imports: [
     FormsModule,

@@ -59,12 +59,20 @@ export class LecturersComponent implements OnInit {
         response => {
           console.log('Lecturer added successfully', response);
           // alert('Lecturer Added Successfully');
-          Swal.fire({
+          const Toast = Swal.mixin({
+            toast: true,
             position: "top-end",
-            icon: "success",
-            title: "Lecturer Added Successfully",
             showConfirmButton: false,
-            timer: 1500
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Lecturer added successfully"
           });
           this.lecturerForm.reset();
           this.fetchLecturers(); // Fetch updated list

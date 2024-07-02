@@ -8,6 +8,11 @@ import { SettingsComponent } from './settings/settings.component';
 import { LoginComponent } from './login/login.component';
 import { MainLayoutComponent } from './main-layout/main-layout.component';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
+import { LecturerHomeComponent } from './lecturer-home/lecturer-home.component';
+import { LecturerCoursesComponent } from './lecturer-courses/lecturer-courses.component';
+import { LecturerAttendencesComponent } from './lecturer-attendences/lecturer-attendences.component';
+import { StudentHomeComponent } from './student-home/student-home.component';
+import { StudentAttendencesComponent } from './student-attendences/student-attendences.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -17,6 +22,11 @@ const routes: Routes = [
     component: MainLayoutComponent,
     children: [
       { path: 'home', component: DashboardComponent, canActivate: [AuthGuard] },
+      {path: 'lecturerHome', component: LecturerHomeComponent, canActivate: [AuthGuard]},
+      {path: 'lecturerCourses', component: LecturerCoursesComponent, canActivate: [AuthGuard]},
+      {path: 'lecturerAttendence', component: LecturerAttendencesComponent, canActivate: [AuthGuard]},
+      {path: 'studentHome', component: StudentHomeComponent, canActivate: [AuthGuard]},
+      {path: 'studentAttendence', component: StudentAttendencesComponent, canActivate: [AuthGuard]},
       { path: 'lecturers', component: LecturersComponent, canActivate: [AuthGuard] },
       { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
       { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },

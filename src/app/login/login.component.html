@@ -33,6 +33,8 @@
         type="text"
         placeholder="Username"
         [(ngModel)]="loginModel.username"
+        [(ngModel)]="loginLecturerModel.lecturerEmail"
+        [(ngModel)]="loginStudentModel.registrationNumber"
         name="username"
         required
       />
@@ -40,6 +42,8 @@
         type="password"
         placeholder="Password"
         [(ngModel)]="loginModel.password"
+        [(ngModel)]="loginLecturerModel.lecturerPassword"
+        [(ngModel)]="loginStudentModel.password"
         name="password"
         required
       />

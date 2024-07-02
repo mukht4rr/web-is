@@ -10,7 +10,7 @@ import { Student } from './students/students.component';
 })
 export class AuthService {
   [x: string]: any;
-  private baseUrl = 'http://localhost:8080'; // Adjust the base URL as needed
+  public baseUrl = 'http://localhost:8080';
   private isLoggedInStatus = false;
 
   constructor(private http: HttpClient) {}
@@ -23,6 +23,8 @@ export class AuthService {
     return this.http.post<any>(`${this.baseUrl}/auth/login`, user).pipe(
       tap(response => {
         if (response.message === 'Login successful') {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role); // Store user role
           this.isLoggedInStatus = true;
         }
       }),
@@ -32,6 +34,41 @@ export class AuthService {
       })
     );
   }
+
+  lecturerLogin(lecturer: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/auth/lecturerLogin`, lecturer).pipe(
+      tap(response => {
+        if (response.message === 'Login successful') {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role);
+          localStorage.setItem('lecturerId', response.lecturerId); // Store lecturer ID
+          this.isLoggedInStatus = true;
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Login error:', error);
+        return throwError(() => new Error(error.error.message || 'Login failed'));
+      })
+    );
+  }
+
+  studentLogin(student: any): Observable<any> {
+    return this.http.post<any>(`${this.baseUrl}/auth/studentLogin`, student).pipe(
+      tap(response => {
+        if (response.message === 'Login successful') {
+          localStorage.setItem('token', response.token);
+          localStorage.setItem('role', response.role);
+          localStorage.setItem('lecturerId', response.lecturerId); // Store lecturer ID
+          this.isLoggedInStatus = true;
+        }
+      }),
+      catchError((error: HttpErrorResponse) => {
+        console.error('Login error:', error);
+        return throwError(() => new Error(error.error.message || 'Login failed'));
+      })
+    );
+  }
+  
 
   logout(): Observable<any> {
     return this.http.post(`${this.baseUrl}/auth/logout`, {}).pipe(

@@ -60,12 +60,20 @@ export class CoursesComponent implements OnInit {
         response => {
           console.log('Course added successfully', response);
           // alert('Course Added Successfully');
-          Swal.fire({
+          const Toast = Swal.mixin({
+            toast: true,
             position: "top-end",
-            icon: "success",
-            title: "Course Added Successfully",
             showConfirmButton: false,
-            timer: 1500
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Course added successfully"
           });
           this.courseForm.reset();
           this.fetchCourses(); // Fetch updated list

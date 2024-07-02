@@ -4,54 +4,89 @@
     <div class="side-header">
       <h3>S<span>uza</span></h3>
     </div>
-
     <div class="side-content">
       <div class="profile">
         <div
           class="profile-img bg-img"
           style="background-image: url(../assets/images/admin.jpg)"
         ></div>
-        <h4>Mukht4rr</h4>
-        <small>Admin</small>
+        <h4>{{ userRole }}</h4>
+        <small>
+          {{
+            userRole === "admin"
+              ? "Admin"
+              : userRole === "lecturer"
+              ? "Lecturer"
+              : "Student"
+          }}
+        </small>
       </div>
-
       <div class="side-menu">
+        <ul *ngIf="userRole === 'admin'">
+          <li>
+            <a routerLink="/home" routerLinkActive="active"
+              ><span class="las la-home"></span><small>Dashboard</small></a
+            >
+          </li>
+          <li>
+            <a routerLink="/lecturers" routerLinkActive="active"
+              ><span class="las la-user-alt"></span><small>Lecturers</small></a
+            >
+          </li>
+          <li>
+            <a routerLink="/students" routerLinkActive="active"
+              ><span class="las la-user-alt"></span><small>Students</small></a
+            >
+          </li>
+          <li>
+            <a routerLink="/courses" routerLinkActive="active"
+              ><span class="las la-clipboard-list"></span
+              ><small>Courses</small></a
+            >
+          </li>
+          <li>
+            <a routerLink="/settings" routerLinkActive="active"
+              ><span class="las la-cog"></span><small>Settings</small></a
+            >
+          </li>
+        </ul>
+        <ul *ngIf="userRole === 'lecturer'">
+          <li>
+            <a routerLink="/lecturerHome" routerLinkActive="active"
+              ><span class="las la-home"></span><small>Home</small></a
+            >
+          </li>
+          <li>
+            <a routerLink="/lecturerCourses" routerLinkActive="active"
+              ><span class="las la-clipboard-list"></span
+              ><small>My Courses</small></a
+            >
+          </li>
+          <li>
+            <a routerLink="/lecturerAttendence" routerLinkActive="active"
+              ><span class="las la-user-alt"></span
+              ><small>Attendences</small></a
+            >
+          </li>
+        </ul>
+        <ul *ngIf="userRole === 'student'">
+          <li>
+            <a routerLink="/studentHome" routerLinkActive="active"
+              ><span class="las la-home"></span><small>Main</small></a
+            >
+          </li>
+          <li>
+            <a routerLink="/studentAttendence" routerLinkActive="active"
+              ><span class="las la-clipboard-list"></span
+              ><small>My Attendences</small></a
+            >
+          </li>
+        </ul>
         <ul>
           <li>
-            <a href="" routerLink="/home" routerLinkActive="active">
-              <span class="las la-home"></span>
-              <small>Dashboard</small>
-            </a>
-          </li>
-          <li>
-            <a href="" routerLink="/lecturers" routerLinkActive="active">
-              <span class="las la-user-alt"></span>
-              <small>Lecturers</small>
-            </a>
-          </li>
-          <li>
-            <a href="" routerLink="/students" routerLinkActive="active">
-              <span class="las la-user-alt"></span>
-              <small>Students</small>
-            </a>
-          </li>
-          <li>
-            <a href="" routerLink="/courses" routerLinkActive="active">
-              <span class="las la-clipboard-list"></span>
-              <small>Courses</small>
-            </a>
-          </li>
-          <li>
-            <a href="" routerLink="/settings" routerLinkActive="active">
-              <span class="las la-cog"></span>
-              <small>Settings</small>
-            </a>
-          </li>
-          <li>
-            <a href="" (click)="onLogout()">
-              <span class="las la-sign-out-alt"></span>
-              <small>Logout</small>
-            </a>
+            <a href="" (click)="onLogout()"
+              ><span class="las la-sign-out-alt"></span><small>Logout</small></a
+            >
           </li>
         </ul>
       </div>
