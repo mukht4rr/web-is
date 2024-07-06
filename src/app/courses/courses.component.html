@@ -75,6 +75,7 @@
               <tr>
                 <th><span class="las la-sort"></span> COURSE NAME</th>
                 <th><span class="las la-sort"></span> COURSE CODE</th>
+                <th><span class="las la-sort"></span> ENROLLMENT KEY</th>
                 <th><span class="las la-sort"></span> STATUS</th>
                 <th><span class="las la-sort"></span> ACTION</th>
               </tr>
@@ -83,6 +84,7 @@
               <tr *ngFor="let course of filteredCourses">
                 <td>{{ course.courseTitle }}</td>
                 <td>{{ course.courseCode }}</td>
+                <td>{{ course.enrollmentKey }}</td>
                 <td>
                   <div class="cl-toggle-switch">
                     <label class="switch">
@@ -152,6 +154,17 @@
                     class="form-control"
                     id="recipient-ccode"
                     formControlName="courseCode"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="recipient-ccode" class="col-form-label"
+                    >Enrollment Key:</label
+                  >
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="recipient-ccode"
+                    formControlName="enrollmentKey"
                   />
                 </div>
                 <div class="modal-footer">

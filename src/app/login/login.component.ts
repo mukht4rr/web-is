@@ -91,7 +91,7 @@ export class LoginComponent implements AfterViewInit {
             const role = response.role;
             const name = response.name;
             if (response.message === 'Login successful') {
-                this.router.navigate([role === 'lecturer' ? '/lecturerHome' : '/home']);
+                this.router.navigate(['/home']);
                 const Toast = Swal.mixin({
                   toast: true,
                   position: "top-end",
@@ -151,7 +151,7 @@ export class LoginComponent implements AfterViewInit {
             console.log('Lecturer Login successful', response);
             const role = response.role;
             if (response.message === 'Login successful') {
-                this.router.navigate([role === 'lecturer' ? '/lecturerHome' : '/home']);
+                this.router.navigate(['/lecturerHome']);
                 const Toast = Swal.mixin({
                   toast: true,
                   position: "top-end",
@@ -211,7 +211,9 @@ export class LoginComponent implements AfterViewInit {
           console.log('Student Login successful', response);
           const role = response.role;
           if (response.message === 'Login successful') {
-              this.router.navigate([role === 'student' ? '/studentHome' : '']);
+            localStorage.setItem('studentId', response.studentId);
+              this.router.navigate(['/studentHome']);
+              // localStorage.setItem('studentId', response.studentId);
               const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -246,7 +248,7 @@ export class LoginComponent implements AfterViewInit {
           }
       },
       (error: any) => {
-          console.error('Lecturer Login failed', error);
+          console.error('Student Login failed', error);
           const Toast = Swal.mixin({
             toast: true,
             position: "top-end",

@@ -7,6 +7,7 @@ export interface Course {
   courseId: number;
   courseTitle: string;
   courseCode: string;
+  enrollmentKey: string;
   status: string;
 }
 
@@ -24,7 +25,8 @@ export class CoursesComponent implements OnInit {
   constructor(private authService: AuthService, private fb: FormBuilder) {
     this.courseForm = this.fb.group({
       courseTitle: ['', Validators.required],
-      courseCode: ['', Validators.required]
+      courseCode: ['', Validators.required],
+      enrollmentKey: ['', Validators.required]
     });
   }
 
@@ -108,12 +110,20 @@ export class CoursesComponent implements OnInit {
     this.authService.updateCourseStatus(course.courseId, course.status).subscribe(
       response => {
         console.log('Course status updated successfully', response);
-        Swal.fire({
+        const Toast = Swal.mixin({
+          toast: true,
           position: "top-end",
-          icon: "success",
-          title: "Course status updated successfully",
           showConfirmButton: false,
-          timer: 1500
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+          }
+        });
+        Toast.fire({
+          icon: "success",
+          title: "Course status updated"
         });
       },
       error => {

@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 @Component({
   selector: 'app-lecturer-courses',
   templateUrl: './lecturer-courses.component.html',
-  styleUrl: './lecturer-courses.component.css'
+  styleUrls: ['./lecturer-courses.component.css']
 })
 export class LecturerCoursesComponent {
 
@@ -27,6 +27,8 @@ export class LecturerCoursesComponent {
           this.loginLecturerCourses = this.loginLecturerCourses.map(course => {
             if (course.course.courseId === courseId) {
               course.course.attendanceCode = randomCode;
+              course.course.attendanceCodeStatus = 'ACTIVE';
+              course.course.date = new Date();
             }
             return course;
           });
@@ -45,13 +47,15 @@ export class LecturerCoursesComponent {
             icon: "success",
             title: "New code generated"
           });
+          this.loading = false;
         },
         error => {
           console.error('Error updating attendance code:', error);
           this.loading = false;
         }
       );
-  }
+}
+
 
   loginLecturerCourses: any[] = [];
   totalCourses: number = 0;
@@ -67,13 +71,12 @@ export class LecturerCoursesComponent {
   loadLecturerCourses(): void {
     const lecturerId = localStorage.getItem('lecturerId');
     if (lecturerId) {
-        this.http.get<any[]>(`${this.authService.baseUrl}/lecturer-course/getLecturerCoursesById/${lecturerId}`)
-            .subscribe(courses => {
-                this.loginLecturerCourses = courses;
-            }, error => {
-                console.error('Error fetching courses:', error);
-            });
+      this.http.get<any[]>(`${this.authService.baseUrl}/lecturer-course/getLecturerCoursesById/${lecturerId}`)
+        .subscribe(courses => {
+          this.loginLecturerCourses = courses;
+        }, error => {
+          console.error('Error fetching courses:', error);
+        });
     }
-}
-
+  }
 }

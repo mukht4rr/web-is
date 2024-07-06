@@ -11,12 +11,13 @@ export class SidebarComponent implements OnInit {
 
   userRole: string | null = '';
   userName: string | null = '';
+  lecturerName: string | null = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem('role');
-    this.userName = localStorage.getItem('username');
+    // this.lecturerName = localStorage.getItem('lecturerName');
     console.log('User role:', this.userRole);
     console.log('User Name', this.userName);
     // Ensure you handle cases where userRole might not be immediately available

@@ -55,6 +55,8 @@
                 <th><span class="las la-sort"></span> COURSE TITLE</th>
                 <th><span class="las la-sort"></span> COURSE CODE</th>
                 <th><span class="las la-sort"></span> ATTENDENCE CODES</th>
+                <th><span class="las la-sort"></span> TIME GENERATED</th>
+                <th><span class="las la-sort"></span> STATUS</th>
                 <th><span class="las la-sort"></span> ACTIONS</th>
               </tr>
             </thead>
@@ -69,6 +71,23 @@
                       <h4>{{ course.course.attendanceCode }}</h4>
                     </div>
                   </div>
+                </td>
+                <td>{{ course.course.date }}</td>
+                <td>
+                  <span
+                    [ngClass]="{
+                      'badge badge-success':
+                        course.course.attendanceCodeStatus === 'ACTIVE',
+                      'badge badge-danger':
+                        course.course.attendanceCodeStatus === 'EXPIRED',
+                      'custom-badge custom-badge-success':
+                        course.course.attendanceCodeStatus === 'ACTIVE',
+                      'custom-badge custom-badge-danger':
+                        course.course.attendanceCodeStatus === 'EXPIRED'
+                    }"
+                  >
+                    {{ course.course.attendanceCodeStatus }}
+                  </span>
                 </td>
                 <td>
                   <div class="add">

@@ -41,6 +41,7 @@ export class AuthService {
         if (response.message === 'Login successful') {
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
+          // localStorage.setItem('lecturerName', response.lecturerName);
           localStorage.setItem('lecturerId', response.lecturerId); // Store lecturer ID
           this.isLoggedInStatus = true;
         }
@@ -58,7 +59,8 @@ export class AuthService {
         if (response.message === 'Login successful') {
           localStorage.setItem('token', response.token);
           localStorage.setItem('role', response.role);
-          localStorage.setItem('lecturerId', response.lecturerId); // Store lecturer ID
+          // localStorage.setItem('studentName', response.studentName);
+          localStorage.setItem('studentId', response.studentId); // Store student id
           this.isLoggedInStatus = true;
         }
       }),
@@ -93,16 +95,6 @@ export class AuthService {
   isLoggedIn(): boolean {
     return this.isLoggedInStatus;
   }
-
-//   login(user: any): Observable<any> {
-//     return this.http.post<any>(`${this.baseUrl}/auth/login`, user).pipe(
-//       catchError((error: HttpErrorResponse) => {
-//         console.error('Login error:', error);
-//         return throwError(() => new Error(error.error.message || 'Login failed'));
-//       })
-//     );
-// }
-
   
 
   addCourse(course: any): Observable<any> {
@@ -115,6 +107,10 @@ export class AuthService {
 
   getAllCourses(): Observable<Course[]> {
     return this.http.get<Course[]>(`${this.baseUrl}/courses/get`);
+  }
+
+  getAllActiveCourses(): Observable<Course[]> {
+    return this.http.get<Course[]>(`${this.baseUrl}/courses/active`);
   }
 
   getAllLecturers(): Observable<Lecturer[]> {
@@ -131,6 +127,10 @@ export class AuthService {
 
   deleteCourse(courseId: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/courses/delete/${courseId}`);
+  }
+
+  enrollCourse(enrollData: { courseId: number; studentId: string; enrollmentKey: string }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/enroll`, enrollData);
   }
   
 

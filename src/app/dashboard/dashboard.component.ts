@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 
 export interface Course {
+courseCode: any;
   courseId: number;
   courseTitle: string;
   status: string;
@@ -126,12 +127,20 @@ export class DashboardComponent implements OnInit {
       this.http.post(`${this.baseUrl}/lecturer-course/assign`, assignment).subscribe(
         response => {
           console.log('Assignment successful', response);
-          Swal.fire({
+          const Toast = Swal.mixin({
+            toast: true,
             position: "top-end",
-            icon: "success",
-            title: "Course Assigned Successfully",
             showConfirmButton: false,
-            timer: 1500
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.onmouseenter = Swal.stopTimer;
+              toast.onmouseleave = Swal.resumeTimer;
+            }
+          });
+          Toast.fire({
+            icon: "success",
+            title: "Course assigned successfully"
           });
         },
         error => {
