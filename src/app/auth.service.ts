@@ -132,6 +132,9 @@ export class AuthService {
   enrollCourse(enrollData: { courseId: number; studentId: string; enrollmentKey: string }): Observable<any> {
     return this.http.post(`${this.baseUrl}/api/enroll`, enrollData);
   }
-  
+
+  attendCourse(attendanceData: { enroll: { enrollId: number }; student_id: number; course_id: number; attendanceCode: string }): Observable<any> {
+    return this.http.post(`${this.baseUrl}/api/attendance/add`, attendanceData);
+  }
 
 }

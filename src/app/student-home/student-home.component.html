@@ -45,14 +45,15 @@
     </div>
 
     <div id="Enrolled" class="tabcontent">
-      <h3>Enrolled Courses</h3>
       <div *ngIf="loginStudentEnrolledCourses.length > 0">
-        <table>
+        <table width="100%">
           <thead>
             <tr>
               <th>#</th>
+              <th><span class="las la-sort"></span> ENROLL ID</th>
               <th><span class="las la-sort"></span> COURSE TITLE</th>
               <th><span class="las la-sort"></span> COURSE CODE</th>
+              <th><span class="las la-sort"></span>ATTEND</th>
             </tr>
           </thead>
           <tbody>
@@ -60,8 +61,20 @@
               *ngFor="let course of loginStudentEnrolledCourses; let i = index"
             >
               <td>{{ i + 1 }}</td>
+              <td>{{ course.enrollId }}</td>
               <td>{{ course.course.courseTitle }}</td>
               <td>{{ course.course.courseCode }}</td>
+              <td>
+                <div class="add">
+                  <button
+                    type="button"
+                    class="btn btn-primary"
+                    (click)="attend(course.course.courseId, course.enrollId)"
+                  >
+                    Attend
+                  </button>
+                </div>
+              </td>
             </tr>
           </tbody>
         </table>

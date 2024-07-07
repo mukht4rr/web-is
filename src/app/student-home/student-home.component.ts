@@ -1,4 +1,3 @@
-// student-home.component.ts
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
@@ -15,6 +14,10 @@ export interface Student{
   fullname: string;
 }
 
+export interface Enrolls{
+  enrollId: number;
+}
+
 
 @Component({
   selector: 'app-student-home',
@@ -22,6 +25,7 @@ export interface Student{
   styleUrls: ['./student-home.component.css']
 })
 export class StudentHomeComponent implements OnInit {
+  enrolls: Enrolls[] = [];
   student: Student[]= [];
   courses: Course[] = [];
   filteredCourses: Course[] = [];
@@ -53,21 +57,7 @@ export class StudentHomeComponent implements OnInit {
     } else {
       console.error('Student ID not found in localStorage');
     }
-  }
-
-//   loadStudentEnrolledCourses(): void {
-//     const student_id = localStorage.getItem('studentId');
-//     if (student_id) {
-//       this.http.get<any[]>('http://127.0.0.1:8080/api/enrolledCourses/{st}')
-//             .subscribe(courses => {
-//               console.log(courses);
-//                 this.loginStudentEnrolledCourses = courses;
-//             }, error => {
-//                 console.error('Error fetching courses:', error);
-//             });
-//     }
-// }
-   
+  }   
 
   fetchCourses() {
     this.authService.getAllActiveCourses().subscribe(
@@ -133,4 +123,58 @@ export class StudentHomeComponent implements OnInit {
       }
     }
   }
+
+  async attend(courseId: number, enrollId: number) {
+    const studentId = localStorage.getItem('studentId');
+    console.log('Attending with ENROLL ID:', enrollId);
+  
+    console.log('Attend in course with ID:', courseId);
+    console.log('With student id', studentId);
+    const { value: code } = await Swal.fire({
+      title: "Enter attendance code",
+      input: "text",
+      inputPlaceholder: "Enter attendance code",
+      inputAttributes: {
+        maxlength: "10",
+        autocapitalize: "off",
+        autocorrect: "off"
+      }
+    });
+  
+    if (code) {
+      const studentId = localStorage.getItem('studentId');
+      if (studentId) {
+        const attendanceData = {
+          enroll: { enrollId },
+          student_id: +studentId, // ensure this is a number
+          course_id: courseId,
+          attendanceCode: code
+        };
+        this.authService.attendCourse(attendanceData).subscribe(
+          (response: any) => {
+            Swal.fire('Success!', 'You have successfully attended the course.', 'success');
+            console.log('Attendance successful', response);
+          },
+          (error: any) => {
+            console.error('Attendance failed', error);
+            if (error.status === 400) {
+              Swal.fire('Error!', 'Invalid attendance code or course has expired.', 'error');
+            } else if (error.status === 409) {
+              Swal.fire('Error!', 'You have already attended this course.', 'error');
+            } else if (error.status === 404) {
+              Swal.fire('Error!', 'Course not found.', 'error');
+            } else {
+              Swal.fire('Error!', 'Failed to attend the course.', 'error');
+              console.log(error);
+            }
+          }
+        );
+      } else {
+        Swal.fire('Error!', 'Student ID not found. Please log in again.', 'error');
+      }
+    }
+  }
+  
+  
+
 }
