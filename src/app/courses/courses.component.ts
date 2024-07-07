@@ -149,7 +149,7 @@ export class CoursesComponent implements OnInit {
       }
     });
   }
-
+  
   deleteCourse(courseId: number) {
     this.authService.deleteCourse(courseId).subscribe(
       response => {
