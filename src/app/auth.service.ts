@@ -101,9 +101,17 @@ export class AuthService {
     return this.http.post(`${this.baseUrl}/courses/add`, course);
   }
 
+  updateCourse(courseId: number, course: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/courses/update/${courseId}`, course);
+  }  
+
   addLecturer(lecturer: any): Observable<any> {
     return this.http.post(`${this.baseUrl}/lecturers/add`, lecturer);
   }
+
+  updateLecturer(lecturerId: number, lecturer: any): Observable<any> {
+    return this.http.put(`${this.baseUrl}/lecturers/update/${lecturerId}`, lecturer);
+  }  
 
   getAllCourses(): Observable<Course[]> {
     return this.http.get<Course[]>(`${this.baseUrl}/courses/get`);
@@ -122,7 +130,7 @@ export class AuthService {
   }
 
   updateCourseStatus(courseId: number, status: string): Observable<any> {
-    return this.http.put(`${this.baseUrl}/courses/update/${courseId}`, { status });
+    return this.http.put(`${this.baseUrl}/courses/updateStatus/${courseId}`, { status });
   }
 
   deleteCourse(courseId: number): Observable<any> {

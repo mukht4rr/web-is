@@ -46,6 +46,7 @@
               data-toggle="modal"
               data-target="#exampleModal"
               data-whatever="@mdo"
+              (click)="openAddLecturerModal()"
             >
               Add Lecturer
             </button>
@@ -97,11 +98,10 @@
                 <td>
                   <div class="actions">
                     <div class="cl-toggle-switch">
-                      <span class="las la-edit"></span>
-                      <label class="cl-switch">
-                        <input type="checkbox" />
-                        <span></span>
-                      </label>
+                      <span
+                        class="las la-edit"
+                        (click)="openEditModal(lecturer)"
+                      ></span>
                     </div>
                   </div>
                 </td>
@@ -112,6 +112,7 @@
       </div>
     </div>
 
+    <!-- ADD LECTURER MODAL -->
     <div
       class="modal fade"
       id="exampleModal"
@@ -175,6 +176,80 @@
                   Close
                 </button>
                 <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- EDIT LECTURER MODAL -->
+    <div
+      class="modal fade"
+      id="editLecturerModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="editLecturerModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editLecturerModalLabel">
+              Edit Lecturer
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form [formGroup]="lecturerForm" (ngSubmit)="onSubmit()">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="recipient-name"
+                  formControlName="lecturerName"
+                />
+              </div>
+              <div class="form-group">
+                <label for="recipient-email" class="col-form-label"
+                  >Email:</label
+                >
+                <input
+                  type="email"
+                  class="form-control"
+                  id="recipient-email"
+                  formControlName="lecturerEmail"
+                />
+              </div>
+              <div class="form-group">
+                <label for="recipient-phone" class="col-form-label"
+                  >Phone:</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="recipient-phone"
+                  formControlName="lecturerPhone"
+                />
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-secondary"
+                  data-dismiss="modal"
+                  (click)="closeModal()"
+                >
+                  Close
+                </button>
+                <button type="submit" class="btn btn-primary">Update</button>
               </div>
             </form>
           </div>

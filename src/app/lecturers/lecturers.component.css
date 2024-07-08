@@ -1,6 +1,10 @@
 .cl-toggle-switch {
     position: relative;
    }
+
+   .la-edit{
+    color: #5fdd54;
+   }
    
    .cl-switch {
     position: relative;

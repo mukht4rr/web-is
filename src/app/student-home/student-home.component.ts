@@ -3,21 +3,20 @@ import { AuthService } from '../auth.service';
 import Swal from 'sweetalert2';
 import { HttpClient } from '@angular/common/http';
 
-export interface Course{
+export interface Course {
   courseId: number;
   courseTitle: string;
   courseCode: string;
 }
 
-export interface Student{
+export interface Student {
   student_id: number;
   fullname: string;
 }
 
-export interface Enrolls{
+export interface Enrolls {
   enrollId: number;
 }
-
 
 @Component({
   selector: 'app-student-home',
@@ -26,7 +25,7 @@ export interface Enrolls{
 })
 export class StudentHomeComponent implements OnInit {
   enrolls: Enrolls[] = [];
-  student: Student[]= [];
+  student: Student[] = [];
   courses: Course[] = [];
   filteredCourses: Course[] = [];
   loginStudentEnrolledCourses: any[] = [];
@@ -38,17 +37,20 @@ export class StudentHomeComponent implements OnInit {
     this.fetchCourses();
     this.openCourse(new Event('click'), 'Enrolled');
   }
-  
+
   loadStudentEnrolledCourses(): void {
     const studentId = localStorage.getItem('studentId');
     console.log('Retrieved studentId from localStorage:', studentId);
-    
+
     if (studentId) {
       this.http.get<any[]>(`${this.authService.baseUrl}/api/enrolledCourses/${studentId}`)
         .subscribe(
           courses => {
-            console.log('Courses fetched from API:', courses); // Log the fetched courses
+            console.log('Courses fetched from API:', courses);
             this.loginStudentEnrolledCourses = courses;
+            if (this.loginStudentEnrolledCourses.length === 0) {
+              this.openCourse(new Event('click'), 'All');
+            }
           },
           error => {
             console.error('Error fetching courses:', error);
@@ -57,18 +59,16 @@ export class StudentHomeComponent implements OnInit {
     } else {
       console.error('Student ID not found in localStorage');
     }
-  }   
+  }
 
   fetchCourses() {
-    this.authService.getAllActiveCourses().subscribe(
-      (courses: any[]) => {
-        this.courses = courses;
-        this.filteredCourses = courses; // Initialize filteredCourses with all courses
-      },
-      error => {
-        console.error('Error fetching courses', error);
-      }
-    );
+    this.authService.getAllActiveCourses().subscribe((courses: Course[]) => {
+      this.courses = courses;
+      this.filteredCourses = courses;
+      console.log('All Courses Fetched:', courses);
+    }, error => {
+      console.error('Error fetching courses', error);
+    });
   }
 
   openCourse(evt: Event, tabName: string) {
@@ -127,7 +127,7 @@ export class StudentHomeComponent implements OnInit {
   async attend(courseId: number, enrollId: number) {
     const studentId = localStorage.getItem('studentId');
     console.log('Attending with ENROLL ID:', enrollId);
-  
+
     console.log('Attend in course with ID:', courseId);
     console.log('With student id', studentId);
     const { value: code } = await Swal.fire({
@@ -140,13 +140,13 @@ export class StudentHomeComponent implements OnInit {
         autocorrect: "off"
       }
     });
-  
+
     if (code) {
       const studentId = localStorage.getItem('studentId');
       if (studentId) {
         const attendanceData = {
           enroll: { enrollId },
-          student_id: +studentId, // ensure this is a number
+          student_id: +studentId,
           course_id: courseId,
           attendanceCode: code
         };
@@ -174,7 +174,4 @@ export class StudentHomeComponent implements OnInit {
       }
     }
   }
-  
-  
-
 }
