@@ -20,7 +20,7 @@ export interface Lecturer {
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  private baseUrl = 'http://localhost:8080';
+  private baseUrl = 'https://crypto-pulsar-428910-r9.ts.r.appspot.com/';
   totalLecturers: number = 0;
   totalCourses: number = 0;
   totalStudents: number = 0;

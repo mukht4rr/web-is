@@ -13,6 +13,7 @@ import { LecturerCoursesComponent } from './lecturer-courses/lecturer-courses.co
 import { LecturerAttendencesComponent } from './lecturer-attendences/lecturer-attendences.component';
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { StudentAttendencesComponent } from './student-attendences/student-attendences.component';
+import { AttendanceAnalyticsComponent } from './attendance-analytics/attendance-analytics.component';
 import { AuthGuard } from './auth.guard';
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
       { path: 'students', component: StudentsComponent, canActivate: [AuthGuard] },
       { path: 'courses', component: CoursesComponent, canActivate: [AuthGuard] },
       { path: 'settings', component: SettingsComponent, canActivate: [AuthGuard] },
+      { path: 'analytics', component: AttendanceAnalyticsComponent, canActivate: [AuthGuard] },
     ]
   },
   {

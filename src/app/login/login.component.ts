@@ -82,190 +82,79 @@ export class LoginComponent implements AfterViewInit {
     );
   }
 
-  //admin, lecturer and student login method
   onLogin() {
-    //admin
+    // Admin login
     this.authService.login(this.loginModel).subscribe(
         (response: any) => {
-            console.log('User Login successful', response);
-            const role = response.role;
-            const name = response.name;
+            console.log('Admin Login successful', response);
             if (response.message === 'Login successful') {
                 this.router.navigate(['/home']);
-                const Toast = Swal.mixin({
-                  toast: true,
-                  position: "top-end",
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                  }
-                });
-                Toast.fire({
-                  icon: "success",
-                  title: "Login successfully"
-                });
+                this.showToast('success', 'Login successfully');
             } else {
-              const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.onmouseenter = Swal.stopTimer;
-                  toast.onmouseleave = Swal.resumeTimer;
-                }
-              });
-              Toast.fire({
-                icon: "error",
-                title: "Incorrect username or password"
-              });
+                this.showToast('error', 'Incorrect username or password');
             }
         },
         (error: any) => {
-            console.error('User Login failed', error);
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              }
-            });
-            Toast.fire({
-              icon: "warning",
-              title: "Incorrect username or password"
-            });
+            console.error('Admin Login failed', error);
+            this.showToast('warning', 'Incorrect username or password');
         }
     );
 
-    //lecturer
+    // Lecturer login
     this.authService.lecturerLogin(this.loginLecturerModel).subscribe(
         (response: any) => {
             console.log('Lecturer Login successful', response);
-            const role = response.role;
             if (response.message === 'Login successful') {
                 this.router.navigate(['/lecturerHome']);
-                const Toast = Swal.mixin({
-                  toast: true,
-                  position: "top-end",
-                  showConfirmButton: false,
-                  timer: 3000,
-                  timerProgressBar: true,
-                  didOpen: (toast) => {
-                    toast.onmouseenter = Swal.stopTimer;
-                    toast.onmouseleave = Swal.resumeTimer;
-                  }
-                });
-                Toast.fire({
-                  icon: "success",
-                  title: "Login in successfully"
-                });
+                this.showToast('success', 'Login successfully');
             } else {
-              const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.onmouseenter = Swal.stopTimer;
-                  toast.onmouseleave = Swal.resumeTimer;
-                }
-              });
-              Toast.fire({
-                icon: "warning",
-                title: "Incorrect username or password"
-              });
+                this.showToast('error', 'Incorrect username or password');
             }
         },
         (error: any) => {
             console.error('Lecturer Login failed', error);
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              }
-            });
-            Toast.fire({
-              icon: "warning",
-              title: "Incorrect username or password"
-            });
+            this.showToast('warning', 'Incorrect username or password');
         }
     );
 
-    //student
+    // Student login
     this.authService.studentLogin(this.loginStudentModel).subscribe(
-      (response: any) => {
-          console.log('Student Login successful', response);
-          const role = response.role;
-          if (response.message === 'Login successful') {
-            localStorage.setItem('studentId', response.studentId);
-              this.router.navigate(['/studentHome']);
-              // localStorage.setItem('studentId', response.studentId);
-              const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 3000,
-                timerProgressBar: true,
-                didOpen: (toast) => {
-                  toast.onmouseenter = Swal.stopTimer;
-                  toast.onmouseleave = Swal.resumeTimer;
-                }
-              });
-              Toast.fire({
-                icon: "success",
-                title: "Login successfully"
-              });
-          } else {
-            const Toast = Swal.mixin({
-              toast: true,
-              position: "top-end",
-              showConfirmButton: false,
-              timer: 3000,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.onmouseenter = Swal.stopTimer;
-                toast.onmouseleave = Swal.resumeTimer;
-              }
-            });
-            Toast.fire({
-              icon: "warning",
-              title: "Incorrect username or password"
-            });
-          }
-      },
-      (error: any) => {
-          console.error('Student Login failed', error);
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 3000,
-            timerProgressBar: true,
-            didOpen: (toast) => {
-              toast.onmouseenter = Swal.stopTimer;
-              toast.onmouseleave = Swal.resumeTimer;
+        (response: any) => {
+            console.log('Student Login successful', response);
+            if (response.message === 'Login successful') {
+                localStorage.setItem('studentId', response.studentId);
+                this.router.navigate(['/studentHome']);
+                this.showToast('success', 'Login successfully');
+            } else {
+                this.showToast('error', 'Incorrect username or password');
             }
-          });
-          Toast.fire({
-            icon: "warning",
-            title: "Incorrect username or password"
-          });
-      }
-  );
+        },
+        (error: any) => {
+            console.error('Student Login failed', error);
+            this.showToast('warning', 'Incorrect username or password');
+        }
+    );
 }
+
+private showToast(icon: 'success' | 'error' | 'warning' | 'info', title: string) {
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.onmouseenter = Swal.stopTimer;
+            toast.onmouseleave = Swal.resumeTimer;
+        }
+    });
+
+    Toast.fire({
+        icon: icon,
+        title: title
+    });
+}
+
+
 
 }

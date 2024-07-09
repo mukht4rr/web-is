@@ -10,7 +10,7 @@ import { Student } from './students/students.component';
 })
 export class AuthService {
   [x: string]: any;
-  public baseUrl = 'http://localhost:8080';
+  public baseUrl = 'https://crypto-pulsar-428910-r9.ts.r.appspot.com/';
   private isLoggedInStatus = false;
 
   constructor(private http: HttpClient) {}

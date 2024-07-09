@@ -6,10 +6,6 @@
     </div>
     <div class="side-content">
       <div class="profile">
-        <div
-          class="profile-img bg-img"
-          style="background-image: url(../assets/images/admin.jpg)"
-        ></div>
         <h6>{{ userRole }}</h6>
         <small>
           {{
@@ -45,6 +41,11 @@
             >
           </li>
           <li>
+            <a routerLink="/analytics" routerLinkActive="active"
+              ><span class="las la-chart-bar"></span><small>Analytics</small></a
+            >
+          </li>
+          <li>
             <a routerLink="/settings" routerLinkActive="active"
               ><span class="las la-cog"></span><small>Settings</small></a
             >
@@ -68,6 +69,11 @@
               ><small>Attendences</small></a
             >
           </li>
+          <li>
+            <a routerLink="/settings" routerLinkActive="active"
+              ><span class="las la-cog"></span><small>Settings</small></a
+            >
+          </li>
         </ul>
         <ul *ngIf="userRole === 'student'">
           <li>
@@ -79,6 +85,11 @@
             <a routerLink="/studentAttendence" routerLinkActive="active"
               ><span class="las la-clipboard-list"></span
               ><small>My Attendences</small></a
+            >
+          </li>
+          <li>
+            <a routerLink="/settings" routerLinkActive="active"
+              ><span class="las la-cog"></span><small>Settings</small></a
             >
           </li>
         </ul>

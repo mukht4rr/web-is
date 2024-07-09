@@ -89,7 +89,7 @@ export class LecturersComponent implements OnInit {
     if (this.lecturerForm.valid) {
       const lecturerData = {
         ...this.lecturerForm.value,
-        lecturerPassword: '12345678' // Hardcoded password for demonstration
+        lecturerPassword: '12345678'
       };
 
       console.log('Sending lecturer data:', lecturerData);

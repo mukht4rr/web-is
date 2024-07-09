@@ -19,6 +19,7 @@ import { LecturerCoursesComponent } from './lecturer-courses/lecturer-courses.co
 import { StudentHomeComponent } from './student-home/student-home.component';
 import { StudentAttendencesComponent } from './student-attendences/student-attendences.component';
 import { LecturerAttendencesComponent } from './lecturer-attendences/lecturer-attendences.component';
+import { AttendanceAnalyticsComponent } from './attendance-analytics/attendance-analytics.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import { LecturerAttendencesComponent } from './lecturer-attendences/lecturer-at
     LecturerCoursesComponent,
     StudentHomeComponent,
     StudentAttendencesComponent,
-    LecturerAttendencesComponent
+    LecturerAttendencesComponent,
+    AttendanceAnalyticsComponent
   ],
   imports: [
     FormsModule,
